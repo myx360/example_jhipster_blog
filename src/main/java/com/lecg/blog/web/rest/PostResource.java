@@ -1,6 +1,7 @@
 package com.lecg.blog.web.rest;
 
 import com.lecg.blog.service.PostService;
+import com.lecg.blog.service.dto.PostSummaryDTO;
 import com.lecg.blog.web.rest.errors.BadRequestAlertException;
 import com.lecg.blog.service.dto.PostDTO;
 import com.lecg.blog.service.dto.PostCriteria;
@@ -15,7 +16,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -100,6 +100,22 @@ public class PostResource {
     public ResponseEntity<List<PostDTO>> getAllPosts(PostCriteria criteria, Pageable pageable) {
         log.debug("REST request to get Posts by criteria: {}", criteria);
         Page<PostDTO> page = postQueryService.findByCriteria(criteria, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
+     * {@code GET  /postsummaries} : get all the post summaries.
+     *
+     * @param pageable the pagination information.
+     * @param criteria the criteria which the requested entities should match.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of posts in body.
+     */
+    @GetMapping("/postsummaries")
+    public ResponseEntity<List<PostSummaryDTO>> getPostSummaries(PostCriteria criteria, Pageable pageable) {
+        log.debug("REST request to get Post Summaries by criteria: {}", criteria);
+
+        Page<PostSummaryDTO> page = postQueryService.findSummariesByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }

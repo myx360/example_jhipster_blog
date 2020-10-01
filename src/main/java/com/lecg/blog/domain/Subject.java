@@ -29,11 +29,11 @@ public class Subject implements Serializable {
     private String name;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = "tags", allowSetters = true)
+    @JsonIgnoreProperties(value = "subjects", allowSetters = true)
     private Post post;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = "tags", allowSetters = true)
+    @JsonIgnoreProperties(value = "subjects", allowSetters = true)
     private Blog blog;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

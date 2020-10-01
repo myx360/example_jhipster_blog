@@ -30,13 +30,13 @@ public class Blog implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "blog")
+    @OneToMany(mappedBy = "blog", cascade = CascadeType.REMOVE)
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<Post> posts = new HashSet<>();
 
     @OneToMany(mappedBy = "blog")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    private Set<Subject> tags = new HashSet<>();
+    private Set<Subject> subjects = new HashSet<>();
 
     @ManyToOne
     @JsonIgnoreProperties(value = "blogs", allowSetters = true)
@@ -89,29 +89,29 @@ public class Blog implements Serializable {
         this.posts = posts;
     }
 
-    public Set<Subject> getTags() {
-        return tags;
+    public Set<Subject> getSubjects() {
+        return subjects;
     }
 
-    public Blog tags(Set<Subject> subjects) {
-        this.tags = subjects;
+    public Blog subjects(Set<Subject> subjects) {
+        this.subjects = subjects;
         return this;
     }
 
-    public Blog addTag(Subject subject) {
-        this.tags.add(subject);
+    public Blog addSubject(Subject subject) {
+        this.subjects.add(subject);
         subject.setBlog(this);
         return this;
     }
 
-    public Blog removeTag(Subject subject) {
-        this.tags.remove(subject);
+    public Blog removeSubject(Subject subject) {
+        this.subjects.remove(subject);
         subject.setBlog(null);
         return this;
     }
 
-    public void setTags(Set<Subject> subjects) {
-        this.tags = subjects;
+    public void setSubjects(Set<Subject> subjects) {
+        this.subjects = subjects;
     }
 
     public SiteUser getUser() {

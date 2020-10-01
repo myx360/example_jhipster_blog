@@ -260,7 +260,24 @@ public class PostResourceIT {
             .andExpect(jsonPath("$.[*].pinned").value(hasItem(DEFAULT_PINNED.booleanValue())))
             .andExpect(jsonPath("$.[*].eventTime").value(hasItem(DEFAULT_EVENT_TIME.toString())));
     }
-    
+
+
+    @Test
+    @Transactional
+    public void getAllPostSummaries() throws Exception {
+        // Initialize the database
+        postRepository.saveAndFlush(post);
+
+        // Get all the postList
+        restPostMockMvc.perform(get("/api/postsummaries?sort=id,desc"))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(post.getId().intValue())))
+            .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE)))
+            .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
+            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())));
+    }
+
     @Test
     @Transactional
     public void getPost() throws Exception {
@@ -772,21 +789,21 @@ public class PostResourceIT {
 
     @Test
     @Transactional
-    public void getAllPostsByTagIsEqualToSomething() throws Exception {
+    public void getAllPostsBySubjectIsEqualToSomething() throws Exception {
         // Initialize the database
         postRepository.saveAndFlush(post);
-        Subject tag = SubjectResourceIT.createEntity(em);
-        em.persist(tag);
+        Subject subject = SubjectResourceIT.createEntity(em);
+        em.persist(subject);
         em.flush();
-        post.addTag(tag);
+        post.addSubject(subject);
         postRepository.saveAndFlush(post);
-        Long tagId = tag.getId();
+        Long subjectId = subject.getId();
 
-        // Get all the postList where tag equals to tagId
-        defaultPostShouldBeFound("tagId.equals=" + tagId);
+        // Get all the postList where subject equals to subjectId
+        defaultPostShouldBeFound("subjectId.equals=" + subjectId);
 
-        // Get all the postList where tag equals to tagId + 1
-        defaultPostShouldNotBeFound("tagId.equals=" + (tagId + 1));
+        // Get all the postList where subject equals to subjectId + 1
+        defaultPostShouldNotBeFound("subjectId.equals=" + (subjectId + 1));
     }
 
 

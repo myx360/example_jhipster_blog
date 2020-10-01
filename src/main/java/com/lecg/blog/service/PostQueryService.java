@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.criteria.JoinType;
 
+import com.lecg.blog.service.dto.PostSummaryDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -68,6 +69,21 @@ public class PostQueryService extends QueryService<Post> {
             .map(postMapper::toDto);
     }
 
+
+    /**
+     * Return a {@link Page} of {@link PostDTO} which matches the criteria from the database.
+     * @param criteria The object which holds all the filters, which the entities should match.
+     * @param page The page, which should be returned.
+     * @return the matching entities.
+     */
+    @Transactional(readOnly = true)
+    public Page<PostSummaryDTO> findSummariesByCriteria(PostCriteria criteria, Pageable page) {
+        log.debug("find by criteria : {}, page: {}", criteria, page);
+        final Specification<Post> specification = createSpecification(criteria);
+        return postRepository.findAll(specification, page)
+            .map(postMapper::toSummaryDto);
+    }
+
     /**
      * Return the number of matching entities in the database.
      * @param criteria The object which holds all the filters, which the entities should match.
@@ -109,9 +125,9 @@ public class PostQueryService extends QueryService<Post> {
             if (criteria.getEventTime() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getEventTime(), Post_.eventTime));
             }
-            if (criteria.getTagId() != null) {
-                specification = specification.and(buildSpecification(criteria.getTagId(),
-                    root -> root.join(Post_.tags, JoinType.LEFT).get(Subject_.id)));
+            if (criteria.getSubjectId() != null) {
+                specification = specification.and(buildSpecification(criteria.getSubjectId(),
+                    root -> root.join(Post_.subjects, JoinType.LEFT).get(Subject_.id)));
             }
             if (criteria.getBlogId() != null) {
                 specification = specification.and(buildSpecification(criteria.getBlogId(),

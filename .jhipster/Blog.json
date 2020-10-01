@@ -4,7 +4,10 @@
     {
       "fieldName": "name",
       "fieldType": "String",
-      "fieldValidateRules": ["required", "minlength"],
+      "fieldValidateRules": [
+        "required",
+        "minlength"
+      ],
       "fieldValidateRulesMinlength": "3"
     }
   ],
@@ -19,7 +22,7 @@
       "relationshipType": "one-to-many",
       "otherEntityName": "subject",
       "otherEntityRelationshipName": "blog",
-      "relationshipName": "tag"
+      "relationshipName": "subject"
     },
     {
       "relationshipType": "many-to-one",

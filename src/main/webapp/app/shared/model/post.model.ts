@@ -10,7 +10,7 @@ export interface IPost {
   content?: string;
   pinned?: boolean;
   eventTime?: string;
-  tags?: ISubject[];
+  subjects?: ISubject[];
   blogId?: number;
 }
 

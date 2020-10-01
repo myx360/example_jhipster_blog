@@ -27,8 +27,8 @@ entity Subject {
 relationship OneToMany {
     SiteUser{blog} to Blog{user},
     Blog{post} to Post{blog}
-    Post{tag} to Subject
-    Blog{tag} to Subject
+    Post{subject} to Subject
+    Blog{subject} to Subject
 }
 
 relationship OneToOne {

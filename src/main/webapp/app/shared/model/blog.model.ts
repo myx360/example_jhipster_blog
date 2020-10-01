@@ -5,7 +5,7 @@ export interface IBlog {
   id?: number;
   name?: string;
   posts?: IPost[];
-  tags?: ISubject[];
+  subjects?: ISubject[];
   userId?: number;
 }
 

@@ -30,7 +30,7 @@ public class BlogCriteria implements Serializable, Criteria {
 
     private LongFilter postId;
 
-    private LongFilter tagId;
+    private LongFilter subjectId;
 
     private LongFilter userId;
 
@@ -41,7 +41,7 @@ public class BlogCriteria implements Serializable, Criteria {
         this.id = other.id == null ? null : other.id.copy();
         this.name = other.name == null ? null : other.name.copy();
         this.postId = other.postId == null ? null : other.postId.copy();
-        this.tagId = other.tagId == null ? null : other.tagId.copy();
+        this.subjectId = other.subjectId == null ? null : other.subjectId.copy();
         this.userId = other.userId == null ? null : other.userId.copy();
     }
 
@@ -74,12 +74,12 @@ public class BlogCriteria implements Serializable, Criteria {
         this.postId = postId;
     }
 
-    public LongFilter getTagId() {
-        return tagId;
+    public LongFilter getSubjectId() {
+        return subjectId;
     }
 
-    public void setTagId(LongFilter tagId) {
-        this.tagId = tagId;
+    public void setSubjectId(LongFilter subjectId) {
+        this.subjectId = subjectId;
     }
 
     public LongFilter getUserId() {
@@ -104,7 +104,7 @@ public class BlogCriteria implements Serializable, Criteria {
             Objects.equals(id, that.id) &&
             Objects.equals(name, that.name) &&
             Objects.equals(postId, that.postId) &&
-            Objects.equals(tagId, that.tagId) &&
+            Objects.equals(subjectId, that.subjectId) &&
             Objects.equals(userId, that.userId);
     }
 
@@ -114,7 +114,7 @@ public class BlogCriteria implements Serializable, Criteria {
         id,
         name,
         postId,
-        tagId,
+        subjectId,
         userId
         );
     }
@@ -126,7 +126,7 @@ public class BlogCriteria implements Serializable, Criteria {
                 (id != null ? "id=" + id + ", " : "") +
                 (name != null ? "name=" + name + ", " : "") +
                 (postId != null ? "postId=" + postId + ", " : "") +
-                (tagId != null ? "tagId=" + tagId + ", " : "") +
+                (subjectId != null ? "subjectId=" + subjectId + ", " : "") +
                 (userId != null ? "userId=" + userId + ", " : "") +
             "}";
     }

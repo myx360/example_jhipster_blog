@@ -53,7 +53,7 @@ public class Post implements Serializable {
 
     @OneToMany(mappedBy = "post")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    private Set<Subject> tags = new HashSet<>();
+    private Set<Subject> subjects = new HashSet<>();
 
     @ManyToOne
     @JsonIgnoreProperties(value = "posts", allowSetters = true)
@@ -146,29 +146,29 @@ public class Post implements Serializable {
         this.eventTime = eventTime;
     }
 
-    public Set<Subject> getTags() {
-        return tags;
+    public Set<Subject> getSubjects() {
+        return subjects;
     }
 
-    public Post tags(Set<Subject> subjects) {
-        this.tags = subjects;
+    public Post subjects(Set<Subject> subjects) {
+        this.subjects = subjects;
         return this;
     }
 
-    public Post addTag(Subject subject) {
-        this.tags.add(subject);
+    public Post addSubject(Subject subject) {
+        this.subjects.add(subject);
         subject.setPost(this);
         return this;
     }
 
-    public Post removeTag(Subject subject) {
-        this.tags.remove(subject);
+    public Post removeSubject(Subject subject) {
+        this.subjects.remove(subject);
         subject.setPost(null);
         return this;
     }
 
-    public void setTags(Set<Subject> subjects) {
-        this.tags = subjects;
+    public void setSubjects(Set<Subject> subjects) {
+        this.subjects = subjects;
     }
 
     public Blog getBlog() {

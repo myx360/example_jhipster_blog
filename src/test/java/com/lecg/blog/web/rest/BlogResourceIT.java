@@ -296,21 +296,21 @@ public class BlogResourceIT {
 
     @Test
     @Transactional
-    public void getAllBlogsByTagIsEqualToSomething() throws Exception {
+    public void getAllBlogsBySubjectIsEqualToSomething() throws Exception {
         // Initialize the database
         blogRepository.saveAndFlush(blog);
-        Subject tag = SubjectResourceIT.createEntity(em);
-        em.persist(tag);
+        Subject subject = SubjectResourceIT.createEntity(em);
+        em.persist(subject);
         em.flush();
-        blog.addTag(tag);
+        blog.addSubject(subject);
         blogRepository.saveAndFlush(blog);
-        Long tagId = tag.getId();
+        Long subjectId = subject.getId();
 
-        // Get all the blogList where tag equals to tagId
-        defaultBlogShouldBeFound("tagId.equals=" + tagId);
+        // Get all the blogList where subject equals to subjectId
+        defaultBlogShouldBeFound("subjectId.equals=" + subjectId);
 
-        // Get all the blogList where tag equals to tagId + 1
-        defaultBlogShouldNotBeFound("tagId.equals=" + (tagId + 1));
+        // Get all the blogList where subject equals to subjectId + 1
+        defaultBlogShouldNotBeFound("subjectId.equals=" + (subjectId + 1));
     }
 
 

@@ -98,9 +98,9 @@ public class BlogQueryService extends QueryService<Blog> {
                 specification = specification.and(buildSpecification(criteria.getPostId(),
                     root -> root.join(Blog_.posts, JoinType.LEFT).get(Post_.id)));
             }
-            if (criteria.getTagId() != null) {
-                specification = specification.and(buildSpecification(criteria.getTagId(),
-                    root -> root.join(Blog_.tags, JoinType.LEFT).get(Subject_.id)));
+            if (criteria.getSubjectId() != null) {
+                specification = specification.and(buildSpecification(criteria.getSubjectId(),
+                    root -> root.join(Blog_.subjects, JoinType.LEFT).get(Subject_.id)));
             }
             if (criteria.getUserId() != null) {
                 specification = specification.and(buildSpecification(criteria.getUserId(),

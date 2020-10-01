@@ -3,13 +3,18 @@ package com.lecg.blog.service.dto;
 import java.time.LocalDate;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.List;
+import java.util.Objects;
+
 import com.lecg.blog.domain.enumeration.PostType;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
  * A DTO for the {@link com.lecg.blog.domain.Post} entity.
  */
 public class PostDTO implements Serializable {
-    
+
     private Long id;
 
     @NotNull
@@ -24,13 +29,16 @@ public class PostDTO implements Serializable {
     @NotNull
     private String content;
 
+    private String author;
+
     private Boolean pinned;
 
     private LocalDate eventTime;
 
-
     private Long blogId;
-    
+
+    private List<SubjectDTO> subjects;
+
     public Long getId() {
         return id;
     }
@@ -95,35 +103,73 @@ public class PostDTO implements Serializable {
         this.blogId = blogId;
     }
 
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public List<SubjectDTO> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(List<SubjectDTO> subjects) {
+        this.subjects = subjects;
+    }
+
+    @Override
+    public String toString() {
+        return "PostDTO{" +
+            "id=" + id +
+            ", title='" + title + '\'' +
+            ", date=" + date +
+            ", type=" + type +
+            ", content='" + content + '\'' +
+            ", author='" + author + '\'' +
+            ", pinned=" + pinned +
+            ", eventTime=" + eventTime +
+            ", blogId=" + blogId +
+            ", subjects=" + subjects +
+            '}';
+    }
+
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof PostDTO)) {
-            return false;
-        }
+        if (this == o) return true;
 
-        return id != null && id.equals(((PostDTO) o).id);
+        if (o == null || getClass() != o.getClass()) return false;
+
+        PostDTO postDTO = (PostDTO) o;
+
+        return new EqualsBuilder()
+            .append(id, postDTO.id)
+            .append(title, postDTO.title)
+            .append(date, postDTO.date)
+            .append(type, postDTO.type)
+            .append(content, postDTO.content)
+            .append(author, postDTO.author)
+            .append(pinned, postDTO.pinned)
+            .append(eventTime, postDTO.eventTime)
+            .append(blogId, postDTO.blogId)
+            .append(subjects, postDTO.subjects)
+            .isEquals();
     }
 
     @Override
     public int hashCode() {
-        return 31;
-    }
-
-    // prettier-ignore
-    @Override
-    public String toString() {
-        return "PostDTO{" +
-            "id=" + getId() +
-            ", title='" + getTitle() + "'" +
-            ", date='" + getDate() + "'" +
-            ", type='" + getType() + "'" +
-            ", content='" + getContent() + "'" +
-            ", pinned='" + isPinned() + "'" +
-            ", eventTime='" + getEventTime() + "'" +
-            ", blogId=" + getBlogId() +
-            "}";
+        return new HashCodeBuilder(17, 37)
+            .append(id)
+            .append(title)
+            .append(date)
+            .append(type)
+            .append(content)
+            .append(author)
+            .append(pinned)
+            .append(eventTime)
+            .append(blogId)
+            .append(subjects)
+            .toHashCode();
     }
 }

@@ -4,23 +4,31 @@
     {
       "fieldName": "title",
       "fieldType": "String",
-      "fieldValidateRules": ["required"]
+      "fieldValidateRules": [
+        "required"
+      ]
     },
     {
       "fieldName": "date",
       "fieldType": "LocalDate",
-      "fieldValidateRules": ["required"]
+      "fieldValidateRules": [
+        "required"
+      ]
     },
     {
       "fieldName": "type",
       "fieldType": "PostType",
       "fieldValues": "NEWS,BLOG,EVENT",
-      "fieldValidateRules": ["required"]
+      "fieldValidateRules": [
+        "required"
+      ]
     },
     {
       "fieldName": "content",
       "fieldType": "String",
-      "fieldValidateRules": ["required"]
+      "fieldValidateRules": [
+        "required"
+      ]
     },
     {
       "fieldName": "pinned",
@@ -36,7 +44,7 @@
       "relationshipType": "one-to-many",
       "otherEntityName": "subject",
       "otherEntityRelationshipName": "post",
-      "relationshipName": "tag"
+      "relationshipName": "subject"
     },
     {
       "relationshipType": "many-to-one",

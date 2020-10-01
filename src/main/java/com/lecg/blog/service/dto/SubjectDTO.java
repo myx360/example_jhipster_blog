@@ -1,13 +1,17 @@
 package com.lecg.blog.service.dto;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * A DTO for the {@link com.lecg.blog.domain.Subject} entity.
  */
 public class SubjectDTO implements Serializable {
-    
+
     private Long id;
 
     @NotNull
@@ -18,7 +22,7 @@ public class SubjectDTO implements Serializable {
     private Long postId;
 
     private Long blogId;
-    
+
     public Long getId() {
         return id;
     }
@@ -53,19 +57,28 @@ public class SubjectDTO implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof SubjectDTO)) {
-            return false;
-        }
+        if (this == o) return true;
 
-        return id != null && id.equals(((SubjectDTO) o).id);
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SubjectDTO that = (SubjectDTO) o;
+
+        return new EqualsBuilder()
+            .append(id, that.id)
+            .append(name, that.name)
+            .append(postId, that.postId)
+            .append(blogId, that.blogId)
+            .isEquals();
     }
 
     @Override
     public int hashCode() {
-        return 31;
+        return new HashCodeBuilder(17, 37)
+            .append(id)
+            .append(name)
+            .append(postId)
+            .append(blogId)
+            .toHashCode();
     }
 
     // prettier-ignore

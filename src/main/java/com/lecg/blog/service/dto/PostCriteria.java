@@ -58,7 +58,7 @@ public class PostCriteria implements Serializable, Criteria {
 
     private LocalDateFilter eventTime;
 
-    private LongFilter tagId;
+    private LongFilter subjectId;
 
     private LongFilter blogId;
 
@@ -73,7 +73,7 @@ public class PostCriteria implements Serializable, Criteria {
         this.content = other.content == null ? null : other.content.copy();
         this.pinned = other.pinned == null ? null : other.pinned.copy();
         this.eventTime = other.eventTime == null ? null : other.eventTime.copy();
-        this.tagId = other.tagId == null ? null : other.tagId.copy();
+        this.subjectId = other.subjectId == null ? null : other.subjectId.copy();
         this.blogId = other.blogId == null ? null : other.blogId.copy();
     }
 
@@ -138,12 +138,12 @@ public class PostCriteria implements Serializable, Criteria {
         this.eventTime = eventTime;
     }
 
-    public LongFilter getTagId() {
-        return tagId;
+    public LongFilter getSubjectId() {
+        return subjectId;
     }
 
-    public void setTagId(LongFilter tagId) {
-        this.tagId = tagId;
+    public void setSubjectId(LongFilter subjectId) {
+        this.subjectId = subjectId;
     }
 
     public LongFilter getBlogId() {
@@ -172,7 +172,7 @@ public class PostCriteria implements Serializable, Criteria {
             Objects.equals(content, that.content) &&
             Objects.equals(pinned, that.pinned) &&
             Objects.equals(eventTime, that.eventTime) &&
-            Objects.equals(tagId, that.tagId) &&
+            Objects.equals(subjectId, that.subjectId) &&
             Objects.equals(blogId, that.blogId);
     }
 
@@ -186,7 +186,7 @@ public class PostCriteria implements Serializable, Criteria {
         content,
         pinned,
         eventTime,
-        tagId,
+        subjectId,
         blogId
         );
     }
@@ -202,7 +202,7 @@ public class PostCriteria implements Serializable, Criteria {
                 (content != null ? "content=" + content + ", " : "") +
                 (pinned != null ? "pinned=" + pinned + ", " : "") +
                 (eventTime != null ? "eventTime=" + eventTime + ", " : "") +
-                (tagId != null ? "tagId=" + tagId + ", " : "") +
+                (subjectId != null ? "subjectId=" + subjectId + ", " : "") +
                 (blogId != null ? "blogId=" + blogId + ", " : "") +
             "}";
     }
