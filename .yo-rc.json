@@ -35,6 +35,11 @@
     "dtoSuffix": "DTO",
     "otherModules": [],
     "enableTranslation": false,
-    "blueprints": []
+    "blueprints": [],
+    "appsFolders": ["lecg"],
+    "directoryPath": "../",
+    "monitoring": "no",
+    "consoleOptions": [],
+    "jwtSecretKey": "NWYwNTBlNGZjZDRkZGFlNzZlNjkwNzM3NzJiYmIwYTc4Njg0MDM2NGM1MDc4YzUzZGVlMDdiNTcxMTNjZTk3M2I1MDBiNDY2Njg2NWZiN2U0ZmM4MjdjYzhiYjMwOGQwZTA3Zg=="
   }
 }
