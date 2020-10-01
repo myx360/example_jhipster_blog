@@ -50,6 +50,14 @@ public class CacheConfiguration {
             createCache(cm, com.lecg.blog.domain.User.class.getName() + ".authorities");
             createCache(cm, com.lecg.blog.domain.PersistentToken.class.getName());
             createCache(cm, com.lecg.blog.domain.User.class.getName() + ".persistentTokens");
+            createCache(cm, com.lecg.blog.domain.SiteUser.class.getName());
+            createCache(cm, com.lecg.blog.domain.SiteUser.class.getName() + ".blogs");
+            createCache(cm, com.lecg.blog.domain.Blog.class.getName());
+            createCache(cm, com.lecg.blog.domain.Blog.class.getName() + ".posts");
+            createCache(cm, com.lecg.blog.domain.Blog.class.getName() + ".tags");
+            createCache(cm, com.lecg.blog.domain.Post.class.getName());
+            createCache(cm, com.lecg.blog.domain.Post.class.getName() + ".tags");
+            createCache(cm, com.lecg.blog.domain.Subject.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

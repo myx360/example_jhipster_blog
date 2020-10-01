@@ -1,0 +1,43 @@
+{
+  "name": "Blog",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "minlength"],
+      "fieldValidateRulesMinlength": "3"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "post",
+      "otherEntityRelationshipName": "blog",
+      "relationshipName": "post"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "subject",
+      "otherEntityRelationshipName": "blog",
+      "relationshipName": "tag"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "siteUser",
+      "otherEntityRelationshipName": "blog",
+      "relationshipName": "user",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20201001205648",
+  "entityTableName": "blog",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

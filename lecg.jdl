@@ -1,0 +1,47 @@
+entity SiteUser {
+    displayName String required unique
+    moderator Boolean
+}
+
+entity Blog {
+    name String required minlength(3),
+}
+
+entity Post {
+    title String required
+    date LocalDate required
+    type PostType required
+    content String required
+    pinned Boolean
+    eventTime LocalDate
+}
+
+enum PostType {
+    NEWS, BLOG, EVENT
+}
+
+entity Subject {
+    name String required minlength(2)
+}
+
+relationship OneToMany {
+    SiteUser{blog} to Blog{user},
+    Blog{post} to Post{blog}
+    Post{tag} to Subject
+    Blog{tag} to Subject
+}
+
+relationship OneToOne {
+    SiteUser{user} to User
+}
+
+// Set pagination options
+paginate * with pagination
+
+// Use Data Transfer Objects (DTO)
+dto * with mapstruct
+
+filter *
+
+// Set service options to all
+service all with serviceClass

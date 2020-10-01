@@ -1,0 +1,60 @@
+{
+  "name": "Post",
+  "fields": [
+    {
+      "fieldName": "title",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "date",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "PostType",
+      "fieldValues": "NEWS,BLOG,EVENT",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "content",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "pinned",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "eventTime",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "subject",
+      "otherEntityRelationshipName": "post",
+      "relationshipName": "tag"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "blog",
+      "otherEntityRelationshipName": "post",
+      "relationshipName": "blog",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20201001205748",
+  "entityTableName": "post",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}
